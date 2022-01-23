@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "benchmark": "ts-node-dev src/data/cache/benchmark"
   },
   "dependencies": {
+    "api-benchmark": "^1.0.1",
     "axios": "^0.25.0",
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
