@@ -1,24 +1,27 @@
 import { Request, Response } from "express"
 
-import axios from 'axios'
-import { GetUserByEmailInputDTO } from "../business/entities/User";
+import { IGetUserByEmailInputDTO } from "../business/entities/User";
+import { UserBusiness } from "../business/UserBusiness";
 
-const MOCK_API = "https://jsonplaceholder.typicode.com/users/";
+class UserRepository {
 
-// const userBusiness = new UserBusiness()
+   
+}
+
+const userBusiness = new UserBusiness(new UserRepository());
 
 export class UserController {
    public async getUserByEmail(req: Request, res: Response): Promise<void> {
       const email = req.query.email as string;
 
       try {
-         const input: GetUserByEmailInputDTO = {
+         const input: IGetUserByEmailInputDTO = {
             email
          }
          
-         // const user = userBusiness.getUserByEmail(input)
+         const user = userBusiness.getUserByEmail(input)
          
-         // res.status(200).send({ user })
+         res.status(200).send({ user })
       } catch (error) {
          const { statusCode, message } = error
 
