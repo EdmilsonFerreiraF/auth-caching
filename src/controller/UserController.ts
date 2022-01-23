@@ -14,7 +14,7 @@ export class UserController {
          const input: IGetUserByEmailInputDTO = {
             email
          }
-         
+
          const user = await userBusiness.getUserByEmail(input)
 
          res.status(200).send(user)
@@ -24,7 +24,24 @@ export class UserController {
          res.status(statusCode || 400).send({ message })
       }
    }
+   
+   public async getCachedUser(req: Request, res: Response): Promise<void> {
+      const email = req.query.email as string;
 
+      try {
+         const input: IGetUserByEmailInputDTO = {
+            email
+         }
+
+         // const user = await userBusiness.getCachedUser(input)
+
+         // res.status(200).send(user)
+      } catch (error) {
+         const { statusCode, message } = error
+
+         res.status(statusCode || 400).send({ message })
+      }
+   }
 }
 
 export default new UserController()
