@@ -33,9 +33,9 @@ export class UserController {
             email
          }
 
-         // const user = await userBusiness.getCachedUser(input)
+         const user = await userBusiness.getCachedUser(input)
 
-         // res.status(200).send(user)
+         res.status(200).send(user)
       } catch (error) {
          const { statusCode, message } = error
 

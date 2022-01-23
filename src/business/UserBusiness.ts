@@ -26,6 +26,26 @@ export class UserBusiness {
             throw new BaseError(error.name, error.description, error.statusCode, error.message)
         }
     }
+   
+    public async getCachedUser(
+        input: IGetUserByEmailInputDTO
+    )
+    // : Promise<UserModel[]>
+    {
+        try {
+            if (
+                !input.email
+            ) {
+                throw new InvalidInput("Missing input")
+            }
+
+            // const user: UserModel[] = await this.userDatabase.getCachedUser(input)
+
+            // return user
+        } catch (error: any) {
+            throw new BaseError(error.name, error.description, error.statusCode, error.message)
+        }
+    }
 }
 
 export default new UserBusiness(new UserDatabase())
