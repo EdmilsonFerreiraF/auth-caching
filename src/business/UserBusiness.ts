@@ -29,9 +29,7 @@ export class UserBusiness {
    
     public async getCachedUser(
         input: IGetUserByEmailInputDTO
-    )
-    // : Promise<UserModel[]>
-    {
+    ): Promise<string> {
         try {
             if (
                 !input.email
@@ -39,9 +37,9 @@ export class UserBusiness {
                 throw new InvalidInput("Missing input")
             }
 
-            // const user: UserModel[] = await this.userDatabase.getCachedUser(input)
+            const user = await this.userDatabase.getCachedUser(input)
 
-            // return user
+            return user
         } catch (error: any) {
             throw new BaseError(error.name, error.description, error.statusCode, error.message)
         }
