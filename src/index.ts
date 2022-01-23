@@ -5,6 +5,8 @@ import fs from 'fs'
 import morgan from 'morgan'
 import path from 'path'
 
+import { userRouter } from './controller/routes/userRouter'
+
 const app = express()
 
 app.use(express.json())
@@ -22,6 +24,8 @@ app.use(morgan('dev', {
 app.use(morgan('common', {
   stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 }))
+
+app.use('/user', userRouter)
 
 const PORT = process.env.PORT || 4000
 
