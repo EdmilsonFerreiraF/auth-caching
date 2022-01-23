@@ -1,20 +1,17 @@
+import { UserModel } from "../data/model/User";
+import { UserDatabase} from "../data/UserDatabase";
 import { BaseError } from "../errors/BaseError";
 import { InvalidInput } from "../errors/InvalidInput";
-import { IGetUserByEmailInputDTO, User } from "./entities/User";
-
-class UserRepository {
-
-    
-}
+import { IGetUserByEmailInputDTO } from "./entities/User";
 
 export class UserBusiness {
     constructor(
-        private userRepository,
+        private userDatabase: UserDatabase,
     ) { }
     
     public async getUserByEmail(
         input: IGetUserByEmailInputDTO
-    ): Promise<User[]> {
+    ): Promise<UserModel[]> {
         try {
             if (
                 !input.email
@@ -22,7 +19,7 @@ export class UserBusiness {
                 throw new InvalidInput("Missing input")
             }
 
-            const user: User[] = await this.userRepository.getUserByEmail(input.email)
+            const user: UserModel[] = await this.userDatabase.getUserByEmail(input)
 
             return user
         } catch (error: any) {
@@ -31,4 +28,4 @@ export class UserBusiness {
     }
 }
 
-export default new UserBusiness(new UserRepository())
+export default new UserBusiness(new UserDatabase())

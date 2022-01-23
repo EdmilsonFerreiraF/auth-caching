@@ -2,13 +2,9 @@ import { Request, Response } from "express"
 
 import { IGetUserByEmailInputDTO } from "../business/entities/User";
 import { UserBusiness } from "../business/UserBusiness";
+import { UserDatabase } from "../data/UserDatabase";
 
-class UserRepository {
-
-   
-}
-
-const userBusiness = new UserBusiness(new UserRepository());
+const userBusiness = new UserBusiness(new UserDatabase());
 
 export class UserController {
    public async getUserByEmail(req: Request, res: Response): Promise<void> {
@@ -19,9 +15,9 @@ export class UserController {
             email
          }
          
-         const user = userBusiness.getUserByEmail(input)
-         
-         res.status(200).send({ user })
+         const user = await userBusiness.getUserByEmail(input)
+
+         res.status(200).send(user)
       } catch (error) {
          const { statusCode, message } = error
 
